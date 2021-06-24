@@ -9,11 +9,13 @@ import java.util.List;
 
 import com.j2esus.sepomex.exceptions.FunctionalException;
 import com.j2esus.sepomex.model.Suburb;
+import org.springframework.stereotype.Component;
 
+@Component
 public class Datasource {
-  private static List<Suburb> suburbs = new ArrayList<>();
+  private List<Suburb> suburbs = new ArrayList<>();
 
-  public static void loadFromURL() throws IOException{
+  public void loadFromURL() throws IOException{
     URL source = new URL(Constants.URL_FILE);
     BufferedReader reader = new BufferedReader(
       new InputStreamReader(source.openStream(),"ISO-8859-1"));
@@ -25,7 +27,7 @@ public class Datasource {
     }
   }
 
-  public static List<Suburb> getSuburbs(){
+  public List<Suburb> getSuburbs(){
     if(suburbs.isEmpty()){
       try{
         loadFromURL();
@@ -37,15 +39,15 @@ public class Datasource {
     return suburbs;
   }
 
-  private static String convertToUTF8(String in) throws IOException{
+  private String convertToUTF8(String in) throws IOException{
     return new String(in.getBytes("UTF-8"));
   }
 
-  private static boolean isHeader(String line){
+  private boolean isHeader(String line){
     return !line.contains("|") || line.contains("_");
   }
 
-  private static Suburb parse(String line){
+  private Suburb parse(String line){
     String[] fields = line.split("\\|");
     Suburb suburb = new Suburb();
     suburb.setZipCode(fields[Field.ZIPCODE]);

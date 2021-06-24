@@ -3,14 +3,17 @@ package com.j2esus.sepomex.repositories;
 import java.util.Set;
 import java.util.TreeSet;
 
+import com.j2esus.sepomex.util.Datasource;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
 public class StateRepositoryTest {
-  
+  private Datasource datasource = new Datasource();
+
   @Test
   public void getAllStates_returnSetWith32Elements(){
-    StateRepository stateRepository = new StateRepository();
+    StateRepository stateRepository = new StateRepository(datasource);
     Set<String> states = stateRepository.getAllStates();
     Assertions.assertEquals(expectedStates(), states);
   }
