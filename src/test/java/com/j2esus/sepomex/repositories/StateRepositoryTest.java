@@ -2,18 +2,23 @@ package com.j2esus.sepomex.repositories;
 
 import java.util.Set;
 import java.util.TreeSet;
-
 import com.j2esus.sepomex.util.Datasource;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 
 public class StateRepositoryTest {
-  private Datasource datasource = new Datasource();
+  private static Datasource datasource;
+  private static StateRepository stateRepository;
+
+  @BeforeAll
+  public static void beforeAll(){
+    datasource = new Datasource();
+    stateRepository = new StateRepository(datasource);
+  }
 
   @Test
   public void getAllStates_returnSetWith32Elements(){
-    StateRepository stateRepository = new StateRepository(datasource);
     Set<String> states = stateRepository.getAllStates();
     Assertions.assertEquals(expectedStates(), states);
   }
@@ -53,5 +58,36 @@ public class StateRepositoryTest {
     states.add("Yucatán");
     states.add("Zacatecas");
     return states;
+  }
+
+  @Test
+  public void findByName_returnSetWith2Elements(){
+    Set<String> states = stateRepository.findByName("baja california");
+    Assertions.assertEquals(expectedByNameStates(), states);
+  }
+
+  public Set<String> expectedByNameStates(){
+    Set<String> states = new TreeSet<>();
+    states.add("Baja California");
+    states.add("Baja California Sur");
+    return states;
+  }
+
+  @Test
+  public void findByName_returnSetWithOnlyOneElement(){
+    Set<String> states = stateRepository.findByName("Guerrer");
+    Assertions.assertEquals(expectedByNameState(), states);
+  }
+
+  public Set<String> expectedByNameState(){
+    Set<String> states = new TreeSet<>();
+    states.add("Guerrero");
+    return states;
+  }
+
+  @Test
+  public void findByName_nameNotExists_emptyList(){
+    Set<String> states = stateRepository.findByName("Texas");
+    Assertions.assertTrue(states.isEmpty());
   }
 }

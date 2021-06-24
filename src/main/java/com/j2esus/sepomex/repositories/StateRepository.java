@@ -16,20 +16,26 @@ public class StateRepository {
   @Autowired
   public StateRepository(Datasource datasource){
     this.datasource = datasource;
+    loadAllStatesFromDatasource();
+  }
+
+  private void loadAllStatesFromDatasource(){
+    if(states == null){
+      states = new TreeSet<>(
+        datasource.getSuburbs()
+        .stream()
+        .map(item -> item.getState())
+        .collect(Collectors.toSet())
+      );
+    }
   }
 
   public Set<String> getAllStates(){
-    if(states == null)
-      loadAllStates();
     return states;
   }
 
-  private void loadAllStates(){
-    states = new TreeSet<>(
-      datasource.getSuburbs()
-      .stream()
-      .map(item -> item.getState())
-      .collect(Collectors.toSet())
-    );
+  public Set<String> findByName(String name){
+    return states.stream().filter(item -> item.toUpperCase().contains(name.toUpperCase()))
+      .collect(Collectors.toSet());
   }
 }
