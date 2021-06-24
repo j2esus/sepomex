@@ -6,10 +6,12 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.j2esus.sepomex.exceptions.FunctionalException;
 import com.j2esus.sepomex.model.Suburb;
 
 public class Datasource {
-  public static List<Suburb> suburbs = new ArrayList<>();
+  private static List<Suburb> suburbs = new ArrayList<>();
 
   public static void loadFromURL() throws IOException{
     URL source = new URL(Constants.URL_FILE);
@@ -21,6 +23,18 @@ public class Datasource {
         continue;
         suburbs.add(parse(convertToUTF8(line)));
     }
+  }
+
+  public static List<Suburb> getSuburbs(){
+    if(suburbs.isEmpty()){
+      try{
+        loadFromURL();
+      }catch(IOException e){
+        throw new FunctionalException("Error to process the file from "+
+          Constants.URL_FILE, e);
+      }
+    }
+    return suburbs;
   }
 
   private static String convertToUTF8(String in) throws IOException{
