@@ -24,7 +24,7 @@ public class StateController {
         return ResponseEntity.ok(stateRepository.getAllStates());
     }
 
-    @GetMapping("/estados/name/{name}")
+    @GetMapping("/estados/nombre/{name}")
     public ResponseEntity<Set<String>> states(@PathVariable String name){
         return ResponseEntity.ok(stateRepository.findByName(name));
     }
