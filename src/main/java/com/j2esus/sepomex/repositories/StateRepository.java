@@ -35,7 +35,8 @@ public class StateRepository {
   }
 
   public Set<String> findByName(String name){
-    return states.stream().filter(item -> item.toUpperCase().contains(name.toUpperCase()))
+    return states.stream().filter(item -> item.toUpperCase()
+      .contains(name.toUpperCase()))
       .collect(Collectors.toSet());
   }
 }
