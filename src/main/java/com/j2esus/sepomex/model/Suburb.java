@@ -6,6 +6,19 @@ public class Suburb {
   private String type;
   private String town;
   private String state;
+
+  public Suburb(){
+
+  }
+
+  public Suburb(String zipCode, String name, String type,
+      String town, String state){
+    this.zipCode = zipCode;
+    this.name = name;
+    this.type = type;
+    this.town = town;
+    this.state = state;
+  }
   
   public String getZipCode() {
     return zipCode;
