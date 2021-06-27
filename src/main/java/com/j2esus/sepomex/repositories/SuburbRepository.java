@@ -23,4 +23,12 @@ public class SuburbRepository {
       .filter(item -> item.getZipCode().equals(zipCode))
       .collect(Collectors.toList());
   }
+
+  public List<Suburb> findByStateAndTown(String state, String town){
+    return datasource.getSuburbs().stream()
+      .filter(item ->
+        item.getState().equalsIgnoreCase(state) &&
+        item.getTown().equalsIgnoreCase(town))
+      .collect(Collectors.toList());
+  }
 }

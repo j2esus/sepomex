@@ -23,8 +23,14 @@ public class SuburbController {
   }
 
   @GetMapping("/colonias/codigoPostal/{zipCode}")
-  public ResponseEntity<List<Suburb>> states(@PathVariable String zipCode){
+  public ResponseEntity<List<Suburb>> suburbs(@PathVariable String zipCode){
     return ResponseEntity.ok(suburbRepository.findByZipCode(zipCode));
+  }
+
+  @GetMapping("/colonias/estado/nombre/{state}/municipio/nombre/{town}")
+  public ResponseEntity<List<Suburb>> suburbs(@PathVariable String state,
+    @PathVariable String town){
+    return ResponseEntity.ok(suburbRepository.findByStateAndTown(state, town));
   }
   
 }

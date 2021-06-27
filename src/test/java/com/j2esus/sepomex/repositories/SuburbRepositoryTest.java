@@ -130,4 +130,38 @@ public class SuburbRepositoryTest {
       new Suburb("98000","La Pinta", "Colonia", "Zacatecas", "Zacatecas"));
     return suburbs;
   }
+
+  @Test
+  public void findByStateAndTown_stateAndTownExists_listWithTwoElement(){
+    List<Suburb> suburbs = suburbRepository.findByStateAndTown("Zacatecas", "Zacatecas");
+    Assertions.assertIterableEquals(getExpectedSuburbsByStateAndTown(), suburbs);
+  }
+
+  private List<Suburb> getExpectedSuburbsByStateAndTown(){
+    List<Suburb> suburbs = new ArrayList<>();
+    suburbs.add(
+      new Suburb("98000","Zacatecas Centro", "Colonia", "Zacatecas", "Zacatecas"));
+    suburbs.add(
+      new Suburb("98000","La Pinta", "Colonia", "Zacatecas", "Zacatecas"));
+    return suburbs;
+  }
+
+  @Test
+  public void findByStateAndTown_stateAndTownNotExists_emptyList(){
+    List<Suburb> suburbs = suburbRepository.findByStateAndTown("Guerrero", "Unnexists");
+    Assertions.assertTrue(suburbs.isEmpty());
+  }
+
+  @Test
+  public void findByStateAndTown_stateAndTownExists_listWithOneElement(){
+    List<Suburb> suburbs = suburbRepository.findByStateAndTown("AGUASCALIENTES", "Aguascalientes");
+    Assertions.assertIterableEquals(getExpectedSuburbsByStateAndTownOneElement(), suburbs);
+  }
+
+  private List<Suburb> getExpectedSuburbsByStateAndTownOneElement(){
+    List<Suburb> suburbs = new ArrayList<>();
+    suburbs.add(
+      new Suburb("20000","Zona Centro", "Colonia", "Aguascalientes", "Aguascalientes"));
+    return suburbs;
+  }
 }
