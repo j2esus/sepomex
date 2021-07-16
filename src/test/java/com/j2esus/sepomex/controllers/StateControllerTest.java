@@ -19,7 +19,7 @@ public class StateControllerTest extends BaseControllerTest {
   }
 
   @Test
-  public void getEstados_returnHttpStatus200() throws Exception{
+  public void getStates_returnHttpStatus200() throws Exception{
     String uri = "/sepomex/v1/estados";
 
     MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get(uri)
@@ -30,7 +30,7 @@ public class StateControllerTest extends BaseControllerTest {
   }
 
   @Test
-  public void getEstados_returnHttpStatus404() throws Exception{
+  public void getStates_returnHttpStatus404() throws Exception{
     String uri = "/sepomex/v1/estadoss";
 
     MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get(uri)
