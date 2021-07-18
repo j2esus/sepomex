@@ -99,10 +99,10 @@ public class StateRepositoryTest {
   @Test
   public void getAllStates_returnSetWith32Elements(){
     Set<String> states = stateRepository.getAllStates();
-    Assertions.assertEquals(expectedStates(), states);
+    Assertions.assertEquals(allExpectedStates(), states);
   }
 
-  private Set<String> expectedStates(){
+  private Set<String> allExpectedStates(){
     Set<String> states = new TreeSet<>();
     states.add("Aguascalientes");
     states.add("Baja California");
@@ -140,25 +140,24 @@ public class StateRepositoryTest {
   }
 
   @Test
-  public void findByName_returnSetWith2Elements(){
+  public void findByName_twoCoincidences_returnSetWithOnlyOneElement(){
     Set<String> states = stateRepository.findByName("baja california");
-    Assertions.assertEquals(expectedByNameStates(), states);
+    Assertions.assertEquals(bajaCaliforniaState(), states);
   }
 
-  private Set<String> expectedByNameStates(){
+  private Set<String> bajaCaliforniaState(){
     Set<String> states = new TreeSet<>();
     states.add("Baja California");
-    states.add("Baja California Sur");
     return states;
   }
 
   @Test
-  public void findByName_returnSetWithOnlyOneElement(){
-    Set<String> states = stateRepository.findByName("Guerrer");
-    Assertions.assertEquals(expectedByNameState(), states);
+  public void findByName_oneCoincidence_returnSetWithOnlyOneElement(){
+    Set<String> states = stateRepository.findByName("Guerrero");
+    Assertions.assertEquals(guerreroState(), states);
   }
 
-  private Set<String> expectedByNameState(){
+  private Set<String> guerreroState(){
     Set<String> states = new TreeSet<>();
     states.add("Guerrero");
     return states;
