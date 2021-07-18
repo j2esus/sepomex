@@ -168,4 +168,22 @@ public class StateRepositoryTest {
     Set<String> states = stateRepository.findByName("Texas");
     Assertions.assertTrue(states.isEmpty());
   }
+
+  @Test
+  public void findByName_oneCoincidenceWithAccentMark_returnSetWithOnlyOneElement(){
+    Set<String> states = stateRepository.findByName("querétaro");
+    Assertions.assertEquals(queretaroState(), states);
+  }
+
+  @Test
+  public void findByName_oneCoincidenceWithoutAccentMark_returnSetWithOnlyOneElement(){
+    Set<String> states = stateRepository.findByName("Queretaro");
+    Assertions.assertEquals(queretaroState(), states);
+  }
+
+  private Set<String> queretaroState(){
+    Set<String> states = new TreeSet<>();
+    states.add("Querétaro");
+    return states;
+  }
 }

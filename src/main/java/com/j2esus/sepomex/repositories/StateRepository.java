@@ -4,6 +4,7 @@ import java.util.TreeSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 import com.j2esus.sepomex.util.Datasource;
+import com.j2esus.sepomex.util.Utilities;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -35,8 +36,8 @@ public class StateRepository {
   }
 
   public Set<String> findByName(String name){
-    return states.stream().filter(item -> item.toUpperCase()
-      .equalsIgnoreCase(name.toUpperCase()))
+    return states.stream().filter(
+        item -> Utilities.equalsIgnoreDiacritics(item, name))
       .collect(Collectors.toSet());
   }
 }
