@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import com.j2esus.sepomex.model.Suburb;
 import com.j2esus.sepomex.util.Datasource;
+import com.j2esus.sepomex.util.Utilities;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -27,8 +28,8 @@ public class SuburbRepository {
   public List<Suburb> findByStateAndTown(String state, String town){
     return datasource.getSuburbs().stream()
       .filter(item ->
-        item.getState().equalsIgnoreCase(state) &&
-        item.getTown().equalsIgnoreCase(town))
+        Utilities.equalsIgnoreDiacritics(item.getState(), state.trim()) &&
+        Utilities.equalsIgnoreDiacritics(item.getTown(), town.trim()))
       .collect(Collectors.toList());
   }
 }

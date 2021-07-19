@@ -164,4 +164,17 @@ public class SuburbRepositoryTest {
       new Suburb("20000","Zona Centro", "Colonia", "Aguascalientes", "Aguascalientes"));
     return suburbs;
   }
+
+  @Test
+  public void findByStateAndTown_stateAndTownExistsWithoutAccentMark_listWithOneElement(){
+    List<Suburb> suburbs = suburbRepository.findByStateAndTown("Queretaro", "Queretaro");
+    Assertions.assertIterableEquals(getSuburbsByStateAndTownWithAccentMarkOneElement(), suburbs);
+  }
+
+  private List<Suburb> getSuburbsByStateAndTownWithAccentMarkOneElement(){
+    List<Suburb> suburbs = new ArrayList<>();
+    suburbs.add(
+      new Suburb("76000","Centro", "Colonia", "Querétaro", "Querétaro"));
+    return suburbs;
+  }
 }
