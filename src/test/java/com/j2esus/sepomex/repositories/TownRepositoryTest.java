@@ -114,8 +114,14 @@ public class TownRepositoryTest {
   }
 
   @Test
-  public void findByState_stateExists_listWithOneElements(){
+  public void findByState_stateExistsWithAccentMark_listWithOneElements(){
     Set<Town> towns = townRepository.findByState("YUCATÁN ");
+    Assertions.assertEquals(expectedTown(), towns);
+  }
+
+  @Test
+  public void findByState_stateExistsWithoutAccentMark_listWithOneElements(){
+    Set<Town> towns = townRepository.findByState("yucatan");
     Assertions.assertEquals(expectedTown(), towns);
   }
 
