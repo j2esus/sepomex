@@ -72,4 +72,26 @@ public class SuburbControllerTest extends BaseControllerTest {
     int status = mvcResult.getResponse().getStatus();
     Assertions.assertEquals(HttpStatus.NOT_FOUND.value(), status);
   }
+
+  @Test
+  public void getSuburbsByName_returnHttpStatus200() throws Exception{
+    String uri = "/sepomex/v1/colonias/name/campestre";
+
+    MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get(uri)
+      .accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
+
+    int status = mvcResult.getResponse().getStatus();
+    Assertions.assertEquals(HttpStatus.OK.value(), status);
+  }
+
+  @Test
+  public void getSuburbsByName_returnHttpStatus404() throws Exception{
+    String uri = "/sepomex/v1/coloniass/name/test";
+
+    MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get(uri)
+      .accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
+
+    int status = mvcResult.getResponse().getStatus();
+    Assertions.assertEquals(HttpStatus.NOT_FOUND.value(), status);
+  }
 }
