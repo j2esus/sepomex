@@ -32,4 +32,13 @@ public class SuburbRepository {
         Utilities.equalsIgnoreDiacritics(item.getTown(), town.trim()))
       .collect(Collectors.toList());
   }
+
+  public List<Suburb> findByName(String name){
+    if(name.length() < 3)
+      return List.of();
+    return datasource.getSuburbs().stream()
+      .filter(item -> item.getName().toUpperCase()
+        .contains(name.trim().toUpperCase()))
+      .collect(Collectors.toList());
+  }
 }

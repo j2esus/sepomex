@@ -177,4 +177,59 @@ public class SuburbRepositoryTest {
       new Suburb("76000","Centro", "Colonia", "Querétaro", "Querétaro"));
     return suburbs;
   }
+
+  @Test
+  public void findByName_nameExists_listWithOneElement(){
+    List<Suburb> suburbs = suburbRepository.findByName("ciudad");
+    Assertions.assertIterableEquals(getSuburbsWithCiudadName(), suburbs);
+  }
+
+  public List<Suburb> getSuburbsWithCiudadName(){
+    List<Suburb> suburbs = new ArrayList<>();
+    suburbs.add(
+      new Suburb("87000","Ciudad Victoria Centro", "Colonia", "Victoria", "Tamaulipas"));
+    return suburbs;
+  }
+
+  @Test
+  public void findByName_emptyName_emptyList(){
+    List<Suburb> suburbs = suburbRepository.findByName("");
+    Assertions.assertTrue(suburbs.isEmpty());
+  }
+
+  @Test
+  public void findByName_nameWithTwoCharacters_emptyList(){
+    List<Suburb> suburbs = suburbRepository.findByName("ci");
+    Assertions.assertTrue(suburbs.isEmpty());
+  }
+
+  @Test
+  public void findByName_nameWithThreeCharacters_listWithOneElement(){
+    List<Suburb> suburbs = suburbRepository.findByName("rga");
+    Assertions.assertIterableEquals(getSuburbsWithMorganName(), suburbs);
+  }
+
+  public List<Suburb> getSuburbsWithMorganName(){
+    List<Suburb> suburbs = new ArrayList<>();
+    suburbs.add(
+      new Suburb("34010","Morga", "Colonia", "Durango", "Durango"));
+    return suburbs;
+  }
+
+  @Test
+  public void findByName_nameExists_listWithThreeElements(){
+    List<Suburb> suburbs = suburbRepository.findByName("zona");
+    Assertions.assertIterableEquals(getSuburbsWithZonaName(), suburbs);
+  }
+
+  public List<Suburb> getSuburbsWithZonaName(){
+    List<Suburb> suburbs = new ArrayList<>();
+    suburbs.add(
+      new Suburb("20000","Zona Centro", "Colonia", "Aguascalientes", "Aguascalientes"));
+    suburbs.add(
+      new Suburb("23000","Zona Centro", "Colonia", "La Paz", "Baja California Sur"));
+    suburbs.add(
+      new Suburb("25000","Saltillo Zona Centro", "Colonia", "Saltillo", "Coahuila de Zaragoza"));
+    return suburbs;
+  }
 }
