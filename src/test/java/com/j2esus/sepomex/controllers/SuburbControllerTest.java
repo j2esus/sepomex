@@ -75,7 +75,7 @@ public class SuburbControllerTest extends BaseControllerTest {
 
   @Test
   public void getSuburbsByName_returnHttpStatus200() throws Exception{
-    String uri = "/sepomex/v1/colonias/name/campestre";
+    String uri = "/sepomex/v1/colonias/nombre/campestre";
 
     MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get(uri)
       .accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
@@ -86,7 +86,7 @@ public class SuburbControllerTest extends BaseControllerTest {
 
   @Test
   public void getSuburbsByName_returnHttpStatus404() throws Exception{
-    String uri = "/sepomex/v1/coloniass/name/test";
+    String uri = "/sepomex/v1/coloniass/nombre/test";
 
     MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get(uri)
       .accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();

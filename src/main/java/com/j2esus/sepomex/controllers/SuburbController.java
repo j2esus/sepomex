@@ -33,7 +33,7 @@ public class SuburbController {
     return ResponseEntity.ok(suburbRepository.findByStateAndTown(state, town));
   }
 
-  @GetMapping("colonias/name/{name}")
+  @GetMapping("colonias/nombre/{name}")
   public ResponseEntity<List<Suburb>> suburbsByName(@PathVariable String name){
     return ResponseEntity.ok(suburbRepository.findByName(name));
   }
