@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.j2esus.sepomex.model.Suburb;
+import com.j2esus.sepomex.util.Constants;
 import com.j2esus.sepomex.util.Datasource;
 import com.j2esus.sepomex.util.Utilities;
 
@@ -34,11 +35,11 @@ public class SuburbRepository {
   }
 
   public List<Suburb> findByName(String name){
-    if(name.length() < 3)
-      return List.of();
-    return datasource.getSuburbs().stream()
-      .filter(item -> item.getName().toUpperCase()
-        .contains(name.trim().toUpperCase()))
-      .collect(Collectors.toList());
+    if(name.length() >= Constants.MINIMUM_CHARACTER_FOR_EXECUTE_QUERY)
+      return datasource.getSuburbs().stream()
+        .filter(item -> item.getName().toUpperCase()
+          .contains(name.trim().toUpperCase()))
+        .collect(Collectors.toList());
+    return List.of();
   }
 }
