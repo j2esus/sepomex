@@ -34,10 +34,4 @@ public class StateRepository {
   public Set<String> getAllStates(){
     return states;
   }
-
-  public Set<String> findByName(String name){
-    return states.stream().filter(
-        item -> Utilities.equalsIgnoreDiacritics(item, name))
-      .collect(Collectors.toSet());
-  }
 }
