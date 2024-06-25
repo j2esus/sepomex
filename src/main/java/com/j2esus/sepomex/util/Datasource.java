@@ -58,11 +58,11 @@ public class Datasource {
     return suburb;
   }
 
-  private static interface Field{
-    static final Integer ZIPCODE = 0;
-    static final Integer NAME = 1;
-    static final Integer TYPE = 2;
-    static final Integer TOWN = 3;
-    static final Integer STATE = 4;
+  private interface Field {
+    Integer ZIPCODE = 0;
+    Integer NAME = 1;
+    Integer TYPE = 2;
+    Integer TOWN = 3;
+    Integer STATE = 4;
   }
 }
